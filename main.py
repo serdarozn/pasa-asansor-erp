@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Depends, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from typing import List
 
@@ -11,11 +12,19 @@ from app import models, schemas
 models.Base.metadata.create_all(bind=engine)
 
 # 2. ADIM: FastAPI Uygulamasını Başlatma
-# Uygulamamıza bir isim ve açıklama veriyoruz. Bu bilgiler otomatik oluşan dokümantasyonda görünecek.
 app = FastAPI(
     title="Paşa Asansör ERP API",
     description="Stok, Cari ve Üretim (BOM) Takip Sistemi API'si",
     version="1.0.0"
+)
+
+# CORS Ayarları: React arayüzünün bu sunucuya erişebilmesine izin verir
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], # Güvenlik için ileride sadece React adresine kısıtlanabilir
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # 3. ADIM: İlk Fonksiyon (Endpoint - Uç Nokta)
