@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
-import { LayoutDashboard, Package, Users } from 'lucide-react';
+import { LayoutDashboard, Package, Users, ArrowLeftRight, Settings } from 'lucide-react';
 import Urunler from './components/Urunler';
 import Dashboard from './components/Dashboard';
+import Cariler from './components/Cariler';
+import StokHareketleri from './components/StokHareketleri';
+import Imalat from './components/Imalat';
 
 function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -29,7 +32,15 @@ function App() {
             className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 ${activeTab === 'urunler' ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/50' : 'hover:bg-slate-800 hover:text-white'}`}
           >
             <Package size={20} />
-            <span className="font-medium">Ürünler (Stok)</span>
+            <span className="font-medium">Ürün Kartları</span>
+          </button>
+
+          <button 
+            onClick={() => setActiveTab('stokhareketleri')}
+            className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 ${activeTab === 'stokhareketleri' ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/50' : 'hover:bg-slate-800 hover:text-white'}`}
+          >
+            <ArrowLeftRight size={20} />
+            <span className="font-medium">Stok Giriş / Çıkış</span>
           </button>
           
           <button 
@@ -37,12 +48,20 @@ function App() {
             className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 ${activeTab === 'cariler' ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/50' : 'hover:bg-slate-800 hover:text-white'}`}
           >
             <Users size={20} />
-            <span className="font-medium">Cariler</span>
+            <span className="font-medium">Müşteri ve Tedarikçi</span>
+          </button>
+
+          <button 
+            onClick={() => setActiveTab('imalat')}
+            className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 ${activeTab === 'imalat' ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/50' : 'hover:bg-slate-800 hover:text-white'}`}
+          >
+            <Settings size={20} />
+            <span className="font-medium">İmalat (BOM)</span>
           </button>
         </nav>
 
         <div className="p-4 border-t border-slate-800 text-center">
-          <p className="text-xs text-slate-500">v1.0.0 - Paşa Asansör</p>
+          <p className="text-xs text-slate-500">v1.1.0 - Paşa Asansör</p>
         </div>
       </aside>
 
@@ -51,13 +70,9 @@ function App() {
         <div className="max-w-7xl mx-auto p-8 h-full">
           {activeTab === 'dashboard' && <Dashboard />}
           {activeTab === 'urunler' && <Urunler />}
-          {activeTab === 'cariler' && (
-            <div className="flex flex-col items-center justify-center h-full text-center">
-              <Users size={64} className="text-slate-300 mb-4" />
-              <h2 className="text-3xl font-bold text-slate-800 mb-2">Cari Yönetimi</h2>
-              <p className="text-slate-500 max-w-md">Müşteri ve tedarikçi kayıtlarını yöneteceğimiz bu ekran geliştirme aşamasındadır.</p>
-            </div>
-          )}
+          {activeTab === 'stokhareketleri' && <StokHareketleri />}
+          {activeTab === 'cariler' && <Cariler />}
+          {activeTab === 'imalat' && <Imalat />}
         </div>
       </main>
     </div>
