@@ -28,3 +28,13 @@ class UrunResponse(BaseModel):
     # Bu ayar, Pydantic'in veritabanı modelimizi (SQLAlchemy) tanımasını sağlar.
     class Config:
         from_attributes = True
+
+# 3. Ürün Güncelleme Şablonu
+# Güncelleme işleminde sadece değişen bilgilerin gönderilebilmesi için her şeyi 'Optional' yapıyoruz.
+class UrunUpdate(BaseModel):
+    UrunAdi: Optional[str] = None
+    Kategori: Optional[str] = None
+    Birim: Optional[str] = None
+    RafKonumu: Optional[str] = None
+    Fiyat: Optional[float] = None
+    KritikStok: Optional[float] = None
